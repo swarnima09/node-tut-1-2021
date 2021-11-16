@@ -1,16 +1,20 @@
-// const http = require('http');
+const fs      =     require('fs');
+const path    =    require('path');
+const dirPath =   path.join(__dirname,'crud_file')
+const filePath  =  `${dirPath}/apple.txt`
 
-// //create a server object:
-// http.createServer(function (req, resp) {
-//     resp.writeHead(200,{'Content-Type' :'application\json'});
-//     resp.write(JSON.stringify({name:"swarnima",email:"ff"}))
-//     resp.end(); //end the response
-// }).listen(8080);
+fs.writeFileSync(filePath,'thois is it');
+fs.readFile(filePath,'utf8',(err,item)=>{
+console.log(item)
+})
 
-//function to create multiple file in a loop
+fs.appendFile(filePath,' and file name is new',(err)=>{
+    if(!err) console.log("file is update")
+})
 
-const fs        =   require('fs');
-const path      =   require('path');
-const dirPath   =   path.join(__dirname,'files')
+fs.rename(filePath,`${dirPath}/fruit.txt`,(err)=>{
+    if(!err) console.log("file is update")
+})
 
-console.log(dirPath)
+fs.unlinkSync(`${dirPath}/fruit.txt`);
+
