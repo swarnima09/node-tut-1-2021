@@ -13,4 +13,12 @@ const fs        =   require('fs');
 const path      =   require('path');
 const dirPath   =   path.join(__dirname,'files')
 
-console.log(dirPath)
+for(i=0;i<=5;i++){
+    //how to write dynamic file
+    fs.writeFileSync(dirPath+"/hello"+i+".txt","a simple text file");
+}
+
+//syntx to read file
+fs.readdir(dirPath,(err,files)=>{
+    console.log(files,'you will get all your files')
+})
