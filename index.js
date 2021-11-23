@@ -1,20 +1,16 @@
-const fs      =     require('fs');
-const path    =    require('path');
-const dirPath =   path.join(__dirname,'crud_file')
-const filePath  =  `${dirPath}/apple.txt`
+const {MongoClient} = require('mongodb');
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+const database = 'e-comm'
 
-fs.writeFileSync(filePath,'thois is it');
-fs.readFile(filePath,'utf8',(err,item)=>{
-console.log(item)
-})
+async function getData(){
+    let result = await client.connect();
+    let db = result.db(database)
+    //go to particular collection tab;e
+    let collection = db.collection(('product'));
+    let response = await collection.find({}).toArray()
+    console.log(response)
 
-fs.appendFile(filePath,' and file name is new',(err)=>{
-    if(!err) console.log("file is update")
-})
+}
 
-fs.rename(filePath,`${dirPath}/fruit.txt`,(err)=>{
-    if(!err) console.log("file is update")
-})
-
-fs.unlinkSync(`${dirPath}/fruit.txt`);
-
+getData()
